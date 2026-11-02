@@ -26,7 +26,6 @@ const About = () => {
               <p className="mt-6 text-sm font-semibold text-accent">— {t.why.quoteAuthor}</p>
             </div>
           </div>
-          <div className="absolute -bottom-6 -right-6 -z-0 hidden h-40 w-40 rounded-[2rem] border-2 border-accent/40 md:block" />
         </Reveal>
 
         {/* Texto */}

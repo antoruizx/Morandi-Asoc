@@ -38,9 +38,9 @@ const FloatingActions = () => {
       <a
         href={`mailto:${FIRM.email}`}
         aria-label="Email"
-        className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-ink text-accent shadow-xl transition-all hover:-translate-y-1 hover:bg-accent hover:text-accent-foreground"
+        className="grid h-16 w-16 place-items-center rounded-full border border-white/15 bg-ink text-accent shadow-xl transition-all duration-300 hover:scale-110 hover:bg-accent hover:text-accent-foreground"
       >
-        <Mail className="h-5 w-5" />
+        <Mail className="h-7 w-7" />
       </a>
 
       <a
