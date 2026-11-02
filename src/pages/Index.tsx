@@ -1,26 +1,35 @@
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
+import Navbar from "@/components/Navbar";
+import Hero, { Marquee } from "@/components/Hero";
+import PracticeAreas from "@/components/PracticeAreas";
 import About from "@/components/About";
+import Process from "@/components/Process";
+import Team from "@/components/Team";
 import Testimonials from "@/components/Testimonials";
+import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import FloatingActions from "@/components/FloatingActions";
 
-const Index = () => {
-  return (
-    <LanguageProvider>
-      <div className="min-h-screen">
+const Index = () => (
+  <LanguageProvider>
+    <div className="min-h-screen overflow-x-clip">
+      <Navbar />
+      <main>
         <Hero />
-        <Services />
+        <Marquee />
+        <PracticeAreas />
         <About />
+        <Process />
+        <Team />
         <Testimonials />
+        <Faq />
         <Contact />
-        <Footer />
-        <LanguageSwitcher />
-      </div>
-    </LanguageProvider>
-  );
-};
+      </main>
+      <Footer />
+      <FloatingActions />
+    </div>
+  </LanguageProvider>
+);
 
 export default Index;

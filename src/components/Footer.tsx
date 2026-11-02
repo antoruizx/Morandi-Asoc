@@ -1,57 +1,92 @@
-import { Linkedin, Github, Instagram } from "lucide-react";
+import { ArrowUp, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { FIRM, whatsappLink } from "@/lib/firm";
+import { Logo } from "@/components/Navbar";
+import { WhatsAppIcon } from "@/components/motion";
 
 const Footer = () => {
   const { t } = useLanguage();
-  const currentYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
+
+  const links = [
+    { id: "areas", label: t.nav.areas },
+    { id: "estudio", label: t.nav.about },
+    { id: "proceso", label: t.nav.process },
+    { id: "equipo", label: t.nav.team },
+    { id: "faq", label: t.nav.faq },
+    { id: "contacto", label: t.nav.contact },
+  ];
+
+  const socials = [
+    { href: whatsappLink(t.whatsapp.message), icon: WhatsAppIcon, label: "WhatsApp" },
+    { href: FIRM.linkedin, icon: Linkedin, label: "LinkedIn" },
+    { href: FIRM.instagram, icon: Instagram, label: "Instagram" },
+  ];
 
   return (
-    <footer className="bg-primary text-primary-foreground py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-4">Ruiz & Associates</h3>
-            <p className="text-primary-foreground/80">
-              {t('footerTagline')}
-            </p>
-          </div>
-          <div className="flex flex-col items-start md:items-end">
-            <h4 className="font-semibold mb-4 text-lg">Follow Us</h4>
-            <div className="flex space-x-4">
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
+    <footer className="relative border-t border-white/10 bg-[hsl(222_50%_6%)] text-white">
+      <div className="container grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr]">
+        <div>
+          <Logo />
+          <p className="mt-6 max-w-sm leading-relaxed text-white/55">{t.footer.tagline}</p>
+          <div className="mt-6 flex gap-3">
+            {socials.map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-accent transition-colors duration-300"
-                aria-label="LinkedIn"
+                aria-label={label}
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/70 transition-all hover:-translate-y-1 hover:border-accent hover:text-accent"
               >
-                <Linkedin className="h-6 w-6" />
+                <Icon className="h-4 w-4" />
               </a>
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:text-accent transition-colors duration-300"
-                aria-label="GitHub"
-              >
-                <Github className="h-6 w-6" />
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:text-accent transition-colors duration-300"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-6 w-6" />
-              </a>
-            </div>
+            ))}
           </div>
         </div>
-        <div className="border-t border-primary-foreground/20 pt-8 text-center">
-          <p className="text-primary-foreground/70">
-            © {currentYear} Ruiz & Associates. {t('footerRights')}
-          </p>
+
+        <div>
+          <h4 className="font-body text-xs font-semibold uppercase tracking-[0.25em] text-accent">{t.footer.nav}</h4>
+          <ul className="mt-6 grid grid-cols-2 gap-3 text-sm lg:grid-cols-1">
+            {links.map((l) => (
+              <li key={l.id}>
+                <a href={`#${l.id}`} className="text-white/60 transition-colors hover:text-white">{l.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-body text-xs font-semibold uppercase tracking-[0.25em] text-accent">{t.footer.contact}</h4>
+          <ul className="mt-6 space-y-4 text-sm text-white/60">
+            <li className="flex gap-3">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <span>{FIRM.addressLine1}<br />{FIRM.addressLine2}</span>
+            </li>
+            <li>
+              <a href={FIRM.phoneHref} className="flex gap-3 transition-colors hover:text-white">
+                <Phone className="h-4 w-4 shrink-0 text-accent" />
+                {FIRM.phoneDisplay}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${FIRM.email}`} className="flex gap-3 break-all transition-colors hover:text-white">
+                <Mail className="h-4 w-4 shrink-0 text-accent" />
+                {FIRM.email}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-white/40 md:flex-row">
+          <p>© {year} {FIRM.name}. {t.footer.rights}</p>
+          <p className="text-center">{t.footer.disclaimer}</p>
+          <a href="#top" className="group flex items-center gap-2 transition-colors hover:text-accent">
+            {t.footer.backToTop}
+            <ArrowUp className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" />
+          </a>
         </div>
       </div>
     </footer>
